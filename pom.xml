@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Bohnman Core</name>
+    <url>https://github.com/bohnman/bohnman-core-java</url>
+    <description>Bohnman Core </description>
+    <groupId>com.github.bohnman</groupId>
+    <artifactId>bohnman-core</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <licenses>
+        <license>
+            <name>BSD License</name>
+            <url>https://raw.githubusercontent.com/bohnman/bohnman-core-java/master/LICENSE.md</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Ryan Bohn</name>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/bohnman/bohnman-core-java.git</connection>
+        <developerConnection>scm:git:ssh://github.com:bohnman/bohnman-core-java.git</developerConnection>
+        <url>https://github.com/bohnman/bohnman-core-java/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <antlr4-runtime.version>4.7</antlr4-runtime.version>
+        <jackson-databind.version>2.6.4</jackson-databind.version>
+        <jsr305.version>3.0.2</jsr305.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>${antlr4-runtime.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>${jsr305.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>
