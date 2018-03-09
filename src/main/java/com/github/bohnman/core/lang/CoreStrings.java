@@ -70,6 +70,38 @@ public class CoreStrings {
         return str == null ? null : str.toLowerCase();
     }
 
+    public static String repeat(char ch, int repeat) {
+        if (repeat <= 0) {
+            return Character.toString(ch);
+        }
+
+        StringBuilder builder = new StringBuilder(repeat);
+
+        for (int i = 0; i < repeat; i++) {
+            builder.append(ch);
+        }
+
+        return builder.toString();
+    }
+
+    public static String repeat(String str, int repeat) {
+        if (str == null) {
+            return null;
+        }
+
+        if (repeat <= 0) {
+            return str;
+        }
+
+        StringBuilder builder = new StringBuilder(str.length() * repeat);
+
+        for (int i = 0; i < repeat; i++) {
+            builder.append(str);
+        }
+
+        return builder.toString();
+    }
+
     public static String replace(String str, String search, String replace) {
         return replace(str, search, replace, -1);
     }
