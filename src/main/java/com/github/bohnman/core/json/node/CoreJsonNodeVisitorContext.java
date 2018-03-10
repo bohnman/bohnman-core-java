@@ -10,16 +10,20 @@ public class CoreJsonNodeVisitorContext {
 
     private final int depth;
     private Object key;
-    private final CoreJsonPath path;
+    private final CoreJsonPath objectPath;
+    private final CoreJsonPath absolutePath;
+    private final Object parent;
 
     public CoreJsonNodeVisitorContext() {
-        this(0, ROOT_KEY, CoreJsonPath.empty());
+        this(0, ROOT_KEY, null, CoreJsonPath.empty(), CoreJsonPath.empty());
     }
 
-    public CoreJsonNodeVisitorContext(int depth, Object key, CoreJsonPath path) {
+    private CoreJsonNodeVisitorContext(int depth, Object key, Object parent, CoreJsonPath absolutePath, CoreJsonPath objectPath) {
         this.depth = depth;
         this.key = key;
-        this.path = path;
+        this.absolutePath = absolutePath;
+        this.objectPath = objectPath;
+        this.parent = parent;
     }
 
     public int getDepth() {
@@ -34,15 +38,17 @@ public class CoreJsonNodeVisitorContext {
         this.key = key;
     }
 
-    public CoreJsonPath getPath() {
-        return path;
+    public CoreJsonPath getObjectPath() {
+        return objectPath;
     }
 
-    public CoreJsonNodeVisitorContext descend(Object key) {
-        return new CoreJsonNodeVisitorContext(depth + 1, key, path);
+    public Object getParent() {
+        return parent;
     }
 
-    public CoreJsonNodeVisitorContext descend(Object key, CoreJsonPathElement pathElement) {
-        return new CoreJsonNodeVisitorContext(depth + 1, key, path.add(pathElement));
+    public CoreJsonNodeVisitorContext descend(Object key, Object parent, CoreJsonPathElement absolutePathElement, CoreJsonPathElement objectPathElement) {
+        CoreJsonPath absolutePath = (absolutePathElement == null) ? this.absolutePath : this.absolutePath.add(absolutePathElement);
+        CoreJsonPath objectPath = (objectPathElement == null) ? this.objectPath : this.objectPath.add(objectPathElement);
+        return new CoreJsonNodeVisitorContext(depth + 1, key, parent, absolutePath, objectPath);
     }
 }

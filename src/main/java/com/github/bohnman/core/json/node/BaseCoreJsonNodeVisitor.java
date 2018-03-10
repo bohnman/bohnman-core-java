@@ -48,10 +48,11 @@ public abstract class BaseCoreJsonNodeVisitor<T> {
         }
 
         List<CoreJsonNode<T>> newElements = null;
+        Object array = node.getValue();
 
         for (int i = 0; i < node.getArrayElements().size(); i++) {
             CoreJsonNode<T> child = node.getArrayElements().get(i);
-            CoreJsonNode<T> newChild = visitGenericNode(context.descend(i), child);
+            CoreJsonNode<T> newChild = visitGenericNode(context.descend(i, array, new CoreJsonPathElement(Integer.toString(i), array), null), child);
 
             if (child != newChild) {
                 if (newElements == null) newElements = new ArrayList<>(node.getArrayElements());
@@ -105,7 +106,8 @@ public abstract class BaseCoreJsonNodeVisitor<T> {
             CorePair<String, CoreJsonNode<T>> pair = node.getObjectElements().get(i);
             CoreJsonNode<T> child = pair.getRight();
             String key = pair.getLeft();
-            CoreJsonNodeVisitorContext newContext = context.descend(key, new CoreJsonPathElement(key, object));
+            CoreJsonPathElement objectPathElement = new CoreJsonPathElement(key, object);
+            CoreJsonNodeVisitorContext newContext = context.descend(key, object, objectPathElement, objectPathElement);
             CoreJsonNode<T> newChild = visitGenericNode(newContext, pair.getRight());
             key = CoreConversions.toString(newContext.getKey());
 
