@@ -11,8 +11,6 @@ public class CoreObjectMappers {
     }
 
 
-
-
     /**
      * Takes an object and converts it to a string.
      *

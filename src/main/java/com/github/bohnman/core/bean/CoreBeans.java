@@ -83,10 +83,10 @@ public class CoreBeans {
     }
 
     public static void main(String[] args) {
-        Object o = new Object[] {};
+        Object o = new Object[]{};
         System.out.println(getProperty(o, -1));
         System.out.println(getProperty(o, 1));
-        o = new Object[] {"one", "two", "three"};
+        o = new Object[]{"one", "two", "three"};
         System.out.println(getProperty(o, 1));
         System.out.println(getProperty(o, -1));
         System.out.println(getProperty(o, CoreIntRange.emptyExclusive()));

@@ -122,7 +122,7 @@ public class CoreCache<K, V> {
     }
 
     @SuppressWarnings("unchecked")
-    void setRemovalListener(CoreRemovalListener<? extends K,  ? extends  V> removalListener) {
+    void setRemovalListener(CoreRemovalListener<? extends K, ? extends V> removalListener) {
         Objects.requireNonNull(removalListener);
         this.removalListener = (CoreRemovalListener) removalListener;
     }
@@ -182,9 +182,9 @@ public class CoreCache<K, V> {
          * get an entry from the segment; expired entries will be returned as null but not removed from the cache until the LRU list is
          * pruned or a manual {@link CoreCache#refresh()} is performed however a caller can take action using the provided callback
          *
-         * @param key       the key of the entry to get from the cache
-         * @param now       the access time of this entry
-         * @param isExpired test if the entry is expired
+         * @param key          the key of the entry to get from the cache
+         * @param now          the access time of this entry
+         * @param isExpired    test if the entry is expired
          * @param onExpiration a callback if the entry associated to the key is expired
          * @return the entry if there was one, otherwise null
          */
@@ -213,8 +213,7 @@ public class CoreCache<K, V> {
                 } catch (ExecutionException | InterruptedException e) {
                     throw new IllegalStateException(e);
                 }
-            }
-            else {
+            } else {
                 segmentStats.miss();
             }
             return entry;
@@ -299,7 +298,8 @@ public class CoreCache<K, V> {
     }
 
     public static final int NUMBER_OF_SEGMENTS = 256;
-    @SuppressWarnings("unchecked") private final CacheSegment<K, V>[] segments = new CacheSegment[NUMBER_OF_SEGMENTS];
+    @SuppressWarnings("unchecked")
+    private final CacheSegment<K, V>[] segments = new CacheSegment[NUMBER_OF_SEGMENTS];
 
     {
         for (int i = 0; i < segments.length; i++) {
@@ -320,7 +320,8 @@ public class CoreCache<K, V> {
      * @return the value to which the specified key is mapped, or null if this map contains no mapping for the key
      */
     public V get(K key) {
-        return get(key, now(), e -> {});
+        return get(key, now(), e -> {
+        });
     }
 
     private V get(K key, long now, Consumer<Entry<K, V>> onExpiration) {
@@ -338,7 +339,7 @@ public class CoreCache<K, V> {
      * If the specified key is not already associated with a value (or is mapped to null), attempts to compute its
      * value using the given mapping function and enters it into this map unless null. The load method for a given key
      * will be invoked at most once.
-     *
+     * <p>
      * Use of different {@link CoreCacheLoader} implementations on the same key concurrently may result in only the first
      * loader function being called and the second will be returned the result provided by the first including any exceptions
      * thrown during the execution of the first.

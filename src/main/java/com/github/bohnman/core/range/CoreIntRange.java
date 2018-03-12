@@ -121,7 +121,7 @@ public class CoreIntRange {
         }
 
         int normalizedStart = CoreArrays.normalizeIndex(start, len);
-        int normalizedEnd =  end == null ? len : CoreArrays.normalizeIndex(end, len);
+        int normalizedEnd = end == null ? len : CoreArrays.normalizeIndex(end, len);
 
         if (normalizedEnd < normalizedStart) {
             return empty(exclusive);

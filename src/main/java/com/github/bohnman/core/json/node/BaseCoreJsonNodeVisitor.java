@@ -1,9 +1,9 @@
 package com.github.bohnman.core.json.node;
 
 import com.github.bohnman.core.convert.CoreConversions;
+import com.github.bohnman.core.json.path.CoreJsonPathElement;
 import com.github.bohnman.core.lang.CoreAssert;
 import com.github.bohnman.core.tuple.CorePair;
-import com.github.bohnman.core.json.path.CoreJsonPathElement;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -130,7 +130,7 @@ public final class CoreCacheBuilderSpec {
                 isTrue(
                         keyAndValue.size() <= 2,
                         String.format("key-value pair %s with more than one equals sign",
-                        keyValuePair));
+                                keyValuePair));
 
                 // Find the ValueParser for the current key.
                 String key = keyAndValue.get(0);

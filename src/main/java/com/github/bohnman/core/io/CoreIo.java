@@ -1,7 +1,5 @@
 package com.github.bohnman.core.io;
 
-import com.github.bohnman.core.encoding.CoreCharsets;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;

@@ -28,7 +28,6 @@ public class CoreCacheBuilder<K, V> {
 
     /**
      * Sets the amount of time before an entry in the cache expires after it was last accessed.
-     *
      */
     public CoreCacheBuilder<K, V> setExpireAfterAccess(long value, TimeUnit timeUnit) {
         Objects.requireNonNull(timeUnit);
@@ -42,7 +41,6 @@ public class CoreCacheBuilder<K, V> {
 
     /**
      * Sets the amount of time before an entry in the cache expires after it was written.
-     *
      */
     public CoreCacheBuilder<K, V> setExpireAfterWrite(long value, TimeUnit timeUnit) {
         Objects.requireNonNull(timeUnit);
@@ -54,7 +52,7 @@ public class CoreCacheBuilder<K, V> {
         return this;
     }
 
-    public CoreCacheBuilder<? extends K, ? extends  V> setWeigher(ToLongBiFunction<K, V> weigher) {
+    public CoreCacheBuilder<? extends K, ? extends V> setWeigher(ToLongBiFunction<K, V> weigher) {
         Objects.requireNonNull(weigher);
         this.weigher = weigher;
         return this;

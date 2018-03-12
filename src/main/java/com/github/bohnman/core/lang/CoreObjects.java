@@ -11,7 +11,7 @@ public class CoreObjects {
 
     @SuppressWarnings("unchecked")
     @Nullable
-    public static Integer compare(@Nullable  Object o1, @Nullable Object o2) {
+    public static Integer compare(@Nullable Object o1, @Nullable Object o2) {
         if (Objects.equals(o1, o2)) {
             return 0;
         }

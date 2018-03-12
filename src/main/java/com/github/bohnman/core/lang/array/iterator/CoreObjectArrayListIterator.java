@@ -28,12 +28,11 @@ import java.util.NoSuchElementException;
  * The iterator implements a {@link #reset} method, allowing the reset of the iterator
  * back to the start if required.
  *
+ * @version $Id: ObjectArrayListIterator.java 1543928 2013-11-20 20:15:35Z tn $
  * @see CoreObjectArrayIterator
  * @see java.util.Iterator
  * @see java.util.ListIterator
- *
  * @since 3.0
- * @version $Id: ObjectArrayListIterator.java 1543928 2013-11-20 20:15:35Z tn $
  */
 @SuppressWarnings("PointlessBooleanExpression")
 public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> implements ListIterator<E> {
@@ -47,6 +46,7 @@ public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> i
     private int lastItemIndex = -1;
 
     //-------------------------------------------------------------------------
+
     /**
      * Constructs an ObjectArrayListIterator that will iterate over the values in the
      * specified array.
@@ -63,9 +63,9 @@ public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> i
      * Constructs an ObjectArrayListIterator that will iterate over the values in the
      * specified array from a specific start index.
      *
-     * @param array  the array to iterate over
-     * @param start  the index to start iterating at
-     * @throws NullPointerException if <code>array</code> is <code>null</code>
+     * @param array the array to iterate over
+     * @param start the index to start iterating at
+     * @throws NullPointerException      if <code>array</code> is <code>null</code>
      * @throws IndexOutOfBoundsException if the start index is out of bounds
      */
     public CoreObjectArrayListIterator(final E[] array, final int start) {
@@ -76,12 +76,12 @@ public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> i
      * Construct an ObjectArrayListIterator that will iterate over a range of values
      * in the specified array.
      *
-     * @param array  the array to iterate over
-     * @param start  the index to start iterating at
-     * @param end  the index (exclusive) to finish iterating at
+     * @param array the array to iterate over
+     * @param start the index to start iterating at
+     * @param end   the index (exclusive) to finish iterating at
      * @throws IndexOutOfBoundsException if the start or end index is out of bounds
-     * @throws IllegalArgumentException if end index is before the start
-     * @throws NullPointerException if <code>array</code> is <code>null</code>
+     * @throws IllegalArgumentException  if end index is before the start
+     * @throws NullPointerException      if <code>array</code> is <code>null</code>
      */
     public CoreObjectArrayListIterator(final E[] array, final int start, final int end) {
         super(array, start, end);
@@ -150,7 +150,7 @@ public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> i
      * This iterator does not support modification of its backing array's size, and so will
      * always throw an {@link UnsupportedOperationException} when this method is invoked.
      *
-     * @param obj  the object to add
+     * @param obj the object to add
      * @throws UnsupportedOperationException always thrown.
      */
     public void add(final E obj) {
@@ -162,7 +162,7 @@ public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> i
      * <p>
      * This method sets the element that was returned by the last call
      * to {@link #next()} of {@link #previous()}.
-     *
+     * <p>
      * <b>Note:</b> {@link ListIterator} implementations that support <code>add()</code>
      * and <code>remove()</code> only allow <code>set()</code> to be called once per call
      * to <code>next()</code> or <code>previous</code> (see the {@link ListIterator}
@@ -170,9 +170,9 @@ public class CoreObjectArrayListIterator<E> extends CoreObjectArrayIterator<E> i
      * <code>add()</code> or <code>remove()</code>, <code>set()</code> may be
      * called as often as desired.
      *
-     * @param obj  the object to set into the array
+     * @param obj the object to set into the array
      * @throws IllegalStateException if next() has not yet been called.
-     * @throws ClassCastException if the object type is unsuitable for the array
+     * @throws ClassCastException    if the object type is unsuitable for the array
      */
     public void set(final E obj) {
         if (this.lastItemIndex == -1) {

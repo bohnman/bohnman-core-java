@@ -16,18 +16,14 @@ public class CoreFields {
      * Gets an accessible {@link Field} by name, breaking scope if requested. Superclasses/interfaces will be
      * considered.
      *
-     * @param cls
-     *            the {@link Class} to reflect, must not be {@code null}
-     * @param fieldName
-     *            the field name to obtain
-     * @param forceAccess
-     *            whether to break scope restrictions using the
-     *            {@link java.lang.reflect.AccessibleObject#setAccessible(boolean)} method. {@code false} will only
-     *            match {@code public} fields.
+     * @param cls         the {@link Class} to reflect, must not be {@code null}
+     * @param fieldName   the field name to obtain
+     * @param forceAccess whether to break scope restrictions using the
+     *                    {@link java.lang.reflect.AccessibleObject#setAccessible(boolean)} method. {@code false} will only
+     *                    match {@code public} fields.
      * @return the Field object
-     * @throws IllegalArgumentException
-     *             if the class is {@code null}, or the field name is blank or empty or is matched at multiple places
-     *             in the inheritance hierarchy
+     * @throws IllegalArgumentException if the class is {@code null}, or the field name is blank or empty or is matched at multiple places
+     *                                  in the inheritance hierarchy
      */
     private static Field getField(final Class<?> cls, final String fieldName, final boolean forceAccess) {
         CoreAssert.isTrue(cls != null, "The class must not be null");

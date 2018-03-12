@@ -26,7 +26,7 @@ public class CorePair<L, R> {
         return right;
     }
 
-    public static <L, R> CorePair<L, R> of(@Nullable L left, @Nullable  R right) {
+    public static <L, R> CorePair<L, R> of(@Nullable L left, @Nullable R right) {
         return new CorePair<>(left, right);
     }
 

@@ -97,8 +97,9 @@ public class CoreConversions {
 
     /**
      * Parse the given {@code timeZoneString} value into a {@link TimeZone}.
+     *
      * @param timeZoneString the time zone {@code String}, following {@link TimeZone#getTimeZone(String)}
-     * but throwing {@link IllegalArgumentException} in case of an invalid time zone specification
+     *                       but throwing {@link IllegalArgumentException} in case of an invalid time zone specification
      * @return a corresponding {@link TimeZone} instance
      * @throws IllegalArgumentException in case of an invalid time zone specification
      */

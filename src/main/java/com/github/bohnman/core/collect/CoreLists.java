@@ -9,7 +9,7 @@ public class CoreLists {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> List<T> of (Iterable<? extends T> iterable) {
+    public static <T> List<T> of(Iterable<? extends T> iterable) {
         if (iterable instanceof List) {
             return (List<T>) iterable;
         }

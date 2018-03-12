@@ -4,15 +4,20 @@ package com.github.bohnman.core.logging;
 public interface CoreLog {
 
     String getName();
+
     CoreLogLevel getLevel();
 
     boolean isEnabled(CoreLogLevel level);
-    void log(CoreLogLevel level, String msg);
-    void log(CoreLogLevel level, String format, Object arg);
-    void log(CoreLogLevel level, String format, Object arg1, Object arg2);
-    void log(CoreLogLevel level, String format, Object... arguments);
-    void log(CoreLogLevel level, String msg, Throwable t);
 
+    void log(CoreLogLevel level, String msg);
+
+    void log(CoreLogLevel level, String format, Object arg);
+
+    void log(CoreLogLevel level, String format, Object arg1, Object arg2);
+
+    void log(CoreLogLevel level, String format, Object... arguments);
+
+    void log(CoreLogLevel level, String msg, Throwable t);
 
 
     // Trace
@@ -35,9 +40,9 @@ public interface CoreLog {
     default void trace(String format, Object... arguments) {
         log(CoreLogLevel.TRACE, format, arguments);
     }
-    
+
     default void trace(String msg, Throwable t) {
-        log(CoreLogLevel.TRACE, msg, t);    
+        log(CoreLogLevel.TRACE, msg, t);
     }
 
 
