@@ -4,6 +4,7 @@ import com.github.bohnman.core.lang.CoreAssert;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class CoreIterables {
@@ -53,6 +54,39 @@ public class CoreIterables {
         return (iterable instanceof List)
                 ? ((List<T>) iterable).get(position)
                 : CoreIterators.get(iterable.iterator(), position);
+    }
+
+    public static boolean isIterableLike(Object value) {
+        if (value == null) {
+            return false;
+        }
+
+        if (value instanceof Iterable) {
+            return true;
+        }
+
+        if (value.getClass().isArray()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static CoreIndexedIterableWrapper<Object, ?> wrap(Object value) {
+        if (value == null) {
+            return CoreLists.wrap(Collections.emptyList());
+        }
+
+        if (value instanceof Iterable) {
+            return CoreLists.wrap((Iterable) value);
+        }
+
+        if (value.getClass().isArray()) {
+            return CoreArrays.wrap(value);
+        }
+
+        return CoreLists.wrap(Collections.singletonList(value));
     }
 
 }

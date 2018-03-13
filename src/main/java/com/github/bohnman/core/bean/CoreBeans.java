@@ -3,8 +3,8 @@ package com.github.bohnman.core.bean;
 import com.github.bohnman.core.collect.CoreLists;
 import com.github.bohnman.core.convert.CoreConversions;
 import com.github.bohnman.core.lang.CoreMethods;
-import com.github.bohnman.core.lang.array.CoreArrayWrapper;
-import com.github.bohnman.core.lang.array.CoreArrays;
+import com.github.bohnman.core.collect.CoreArrayWrapper;
+import com.github.bohnman.core.collect.CoreArrays;
 import com.github.bohnman.core.range.CoreIntRange;
 
 import java.beans.IntrospectionException;
@@ -48,7 +48,7 @@ public class CoreBeans {
 
             if (key instanceof CoreIntRange) {
                 CoreIntRange range = ((CoreIntRange) key).toExclusive().normalize(wrapper.size());
-                return range.isEmpty() ? wrapper.create(0) : wrapper.slice(range.getStart(), range.getEnd()).getArray();
+                return range.isEmpty() ? wrapper.create(0) : wrapper.slice(range.getStart(), range.getEnd()).getValue();
             }
         }
 

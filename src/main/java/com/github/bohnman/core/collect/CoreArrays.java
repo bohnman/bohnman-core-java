@@ -1,4 +1,4 @@
-package com.github.bohnman.core.lang.array;
+package com.github.bohnman.core.collect;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -122,7 +122,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
 
@@ -164,7 +164,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -204,7 +204,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -244,7 +244,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -284,7 +284,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -325,7 +325,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -365,7 +365,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -405,7 +405,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }
@@ -445,7 +445,7 @@ public class CoreArrays {
         }
 
         @Override
-        public Object getArray() {
+        public Object getValue() {
             return array;
         }
     }

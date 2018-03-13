@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.bohnman.core.lang.array.iterator;
+package com.github.bohnman.core.collect.iterator;
 
 import java.util.ListIterator;
 import java.util.NoSuchElementException;

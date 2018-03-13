@@ -16,37 +16,58 @@ public abstract class BaseCoreJsonNodeVisitor<T> {
     }
 
     protected CoreJsonNode<T> visitGenericNode(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
+        CoreJsonNode<T> result;
+
         switch (node.getType()) {
             case ARRAY:
-                return visitArray(context, node);
+                result = visitArray(context, node);
+                break;
             case BINARY:
-                return visitBinary(context, node);
+                result = visitBinary(context, node);
+                break;
             case BOOLEAN:
-                return visitBoolean(context, node);
+                result = visitBoolean(context, node);
+                break;
             case NULL:
-                return visitNull(context, node);
+                result = visitNull(context, node);
+                break;
             case NUMBER:
-                return visitNumber(context, node);
+                result = visitNumber(context, node);
+                break;
             case STRING:
-                return visitString(context, node);
+                result = visitString(context, node);
+                break;
             case OBJECT:
-                return visitObject(context, node);
+                result = visitObject(context, node);
+                break;
             default:
                 throw new IllegalStateException("Unhandled node type: " + node.getType());
         }
-    }
 
-    protected CoreJsonNode<T> visitArray(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
-        node = visitAtomNode(context, node);
-
-        if (node == null) {
+        if (result == null) {
             return null;
         }
 
-        if (node.getType() != CoreJsonNodeType.ARRAY) {
-            return visitGenericNode(context, node);
+        return visitChildren(context, result);
+    }
+
+    protected CoreJsonNode<T> visitChildren(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
+        if (node.getType() == CoreJsonNodeType.ARRAY) {
+            return visitArrayChildren(context, node);
         }
 
+        if (node.getType() == CoreJsonNodeType.OBJECT) {
+            return visitObjectChildren(context, node);
+        }
+
+        return node;
+    }
+
+    protected CoreJsonNode<T> visitArray(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
+        return visitAtomNode(context, node);
+    }
+
+    protected CoreJsonNode<T> visitArrayChildren(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
         List<CoreJsonNode<T>> newElements = null;
         Object array = node.getValue();
 
@@ -89,16 +110,10 @@ public abstract class BaseCoreJsonNodeVisitor<T> {
     }
 
     protected CoreJsonNode<T> visitObject(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
-        node = visitAtomNode(context, node);
+        return visitAtomNode(context, node);
+    }
 
-        if (node == null) {
-            return null;
-        }
-
-        if (node.getType() != CoreJsonNodeType.OBJECT) {
-            return visitGenericNode(context, node);
-        }
-
+    protected CoreJsonNode<T> visitObjectChildren(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
         List<CorePair<String, CoreJsonNode<T>>> newElements = null;
         Object object = node.getValue();
 

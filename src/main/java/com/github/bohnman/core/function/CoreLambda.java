@@ -1,6 +1,6 @@
 package com.github.bohnman.core.function;
 
-import com.github.bohnman.core.lang.array.CoreArrays;
+import com.github.bohnman.core.collect.CoreArrays;
 
 import javax.annotation.Nullable;
 

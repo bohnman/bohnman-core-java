@@ -1,9 +1,9 @@
-package com.github.bohnman.core.lang.array;
+package com.github.bohnman.core.collect;
 
-import com.github.bohnman.core.lang.array.iterator.CoreArrayIterator;
-import com.github.bohnman.core.lang.array.iterator.CoreArrayListIterator;
-import com.github.bohnman.core.lang.array.iterator.CoreObjectArrayIterator;
-import com.github.bohnman.core.lang.array.iterator.CoreObjectArrayListIterator;
+import com.github.bohnman.core.collect.iterator.CoreArrayIterator;
+import com.github.bohnman.core.collect.iterator.CoreArrayListIterator;
+import com.github.bohnman.core.collect.iterator.CoreObjectArrayIterator;
+import com.github.bohnman.core.collect.iterator.CoreObjectArrayListIterator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,11 +14,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
-
-import static java.lang.String.format;
+import java.util.stream.Stream;
 
 @SuppressWarnings({"ForLoopReplaceableByForEach", "UseBulkOperation", "NullableProblems"})
-public interface CoreArrayWrapper extends List<Object> {
+public interface CoreArrayWrapper extends CoreIndexedIterableWrapper<Object, Object> {
 
     Object get(int index);
 
@@ -28,7 +27,12 @@ public interface CoreArrayWrapper extends List<Object> {
 
     String toString();
 
-    Object getArray();
+    Object getValue();
+
+    @Override
+    default Object collect(Stream<?> stream) {
+        return stream.toArray();
+    }
 
     @Override
     default boolean contains(Object o) {
@@ -43,7 +47,7 @@ public interface CoreArrayWrapper extends List<Object> {
 
     @Override
     default Iterator<Object> iterator() {
-        Object array = getArray();
+        Object array = getValue();
 
         if (array instanceof Object[]) {
             return new CoreObjectArrayIterator<>(array);
@@ -162,7 +166,7 @@ public interface CoreArrayWrapper extends List<Object> {
     @SuppressWarnings("unchecked")
     @Override
     default ListIterator<Object> listIterator(int index) {
-        Object array = getArray();
+        Object array = getValue();
 
         if (array instanceof Object[]) {
             return new CoreObjectArrayListIterator<>(array, index);
@@ -173,7 +177,7 @@ public interface CoreArrayWrapper extends List<Object> {
 
     @Override
     default List<Object> subList(int fromIndex, int toIndex) {
-        CoreArrayWrapper wrapper = slice(fromIndex, toIndex);
+        CoreIndexedIterableWrapper wrapper = slice(fromIndex, toIndex);
         List<Object> list = new ArrayList<>(wrapper.size());
 
         for (int i = 0; i < wrapper.size(); i++) {
@@ -188,7 +192,7 @@ public interface CoreArrayWrapper extends List<Object> {
     }
 
     default CoreArrayWrapper create(int size) {
-        return CoreArrays.wrap(CoreArrays.newArray(getArray().getClass().getComponentType(), size));
+        return CoreArrays.wrap(CoreArrays.newArray(getValue().getClass().getComponentType(), size));
     }
 
     @SuppressWarnings("MethodDoesntCallSuperMethod")
@@ -212,56 +216,5 @@ public interface CoreArrayWrapper extends List<Object> {
 
         return wrapper;
     }
-
-    default CoreArrayWrapper slice(int start) {
-        return slice(start, size());
-    }
-
-    default CoreArrayWrapper slice(int start, int end) {
-        if (start < 0) {
-            throw new ArrayIndexOutOfBoundsException(start);
-        }
-
-        if (end < 0) {
-            throw new ArrayIndexOutOfBoundsException(end);
-        }
-
-        int size = size();
-
-        if (size == 0) {
-            return create(0);
-        }
-
-        if (start >= size) {
-            throw new ArrayIndexOutOfBoundsException(start);
-        }
-
-        if (end > size) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-
-        if (start > end) {
-            throw new IllegalArgumentException(format("start [%s] must be <= end [%s]", start, end));
-        }
-
-        if (start == end) {
-            return create(0);
-        }
-
-        int len = (end - start);
-
-        if (len <= 0) {
-            return create(0);
-        }
-
-        CoreArrayWrapper wrapper = create(len);
-
-        for (int i = start; i < end; i++) {
-            wrapper.set(i - start, get(i));
-        }
-
-        return wrapper;
-    }
-
 
 }

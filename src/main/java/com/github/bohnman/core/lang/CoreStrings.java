@@ -1,6 +1,6 @@
 package com.github.bohnman.core.lang;
 
-import com.github.bohnman.core.lang.array.CoreArrays;
+import com.github.bohnman.core.collect.CoreArrays;
 
 import java.io.IOException;
 import java.io.StringWriter;

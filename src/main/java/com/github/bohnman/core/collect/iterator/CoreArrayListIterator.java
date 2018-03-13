@@ -1,4 +1,4 @@
-package com.github.bohnman.core.lang.array.iterator;
+package com.github.bohnman.core.collect.iterator;
 
 import java.lang.reflect.Array;
 import java.util.ListIterator;
