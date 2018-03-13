@@ -35,6 +35,11 @@ public interface CoreArrayWrapper extends CoreIndexedIterableWrapper<Object, Obj
     }
 
     @Override
+    default CoreArrayWrapper createObjectWrapper(int size) {
+        return new CoreArrays.ObjectArrayWrapper(new Object[size]);
+    }
+
+    @Override
     default boolean contains(Object o) {
         for (int i = 0; i < size(); i++) {
             if (Objects.equals(o, get(i))) {

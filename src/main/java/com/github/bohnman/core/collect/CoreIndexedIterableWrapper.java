@@ -3,8 +3,6 @@ package com.github.bohnman.core.collect;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.lang.String.format;
-
 public interface CoreIndexedIterableWrapper<E, V> extends List<E> {
 
     V getValue();
@@ -12,6 +10,8 @@ public interface CoreIndexedIterableWrapper<E, V> extends List<E> {
     Object collect(Stream<?> stream);
 
     CoreIndexedIterableWrapper<E, V> create(int size);
+
+    CoreIndexedIterableWrapper<Object, Object> createObjectWrapper(int size);
 
     default CoreIndexedIterableWrapper<E, V> slice(int start) {
         return slice(start, size());

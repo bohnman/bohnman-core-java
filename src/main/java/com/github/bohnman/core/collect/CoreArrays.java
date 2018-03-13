@@ -410,7 +410,7 @@ public class CoreArrays {
         }
     }
 
-    private static class ObjectArrayWrapper implements CoreArrayWrapper {
+    static class ObjectArrayWrapper implements CoreArrayWrapper {
         private final Object[] array;
 
         public ObjectArrayWrapper(Object[] array) {
