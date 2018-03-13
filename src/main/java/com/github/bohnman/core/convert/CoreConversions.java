@@ -1,6 +1,7 @@
 package com.github.bohnman.core.convert;
 
 import com.github.bohnman.core.collect.CoreArrays;
+import com.github.bohnman.core.function.CoreLambda;
 
 import javax.annotation.Nullable;
 import java.util.TimeZone;
@@ -80,6 +81,25 @@ public class CoreConversions {
         }
 
         return (in) -> o;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static CoreLambda toLambda(Object o) {
+        if (o instanceof CoreLambda) {
+            return (CoreLambda) o;
+        }
+
+        if (o instanceof Function) {
+            Function f = (Function) o;
+            return args -> args.length == 0 ? f.apply(null) : f.apply(args[0]);
+        }
+
+        if (o instanceof Predicate) {
+            Predicate p = (Predicate) o;
+            return args -> args.length == 0 ? p.test(null) : p.test(args[0]);
+        }
+
+        return args -> o;
     }
 
     @SuppressWarnings("unchecked")
