@@ -198,6 +198,35 @@ public class CoreStrings {
         }
 
         return str.substring(start, end);
+
+    }
+
+
+    public static String ltrim(String str) {
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return str;
+        }
+        int start = 0;
+
+        while (start != strLen && Character.isWhitespace(str.charAt(start))) {
+            start++;
+        }
+
+        return str.substring(start);
+    }
+
+    public static String rtrim(final String str) {
+        int end;
+        if (str == null || (end = str.length()) == 0) {
+            return str;
+        }
+
+        while (end != 0 && Character.isWhitespace(str.charAt(end - 1))) {
+            end--;
+        }
+
+        return str.substring(0, end);
     }
 
     public static String trim(String str) {
