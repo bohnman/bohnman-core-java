@@ -35,7 +35,13 @@ public class CoreListWrapper<E> implements CoreIndexedIterableWrapper<E, List<E>
 
     @Override
     public CoreListWrapper<E> create(int size) {
-        return new CoreListWrapper<>(new ArrayList<>(size));
+        ArrayList<E> list = new ArrayList<>(size);
+
+        for (int i = 0; i < size; i++) {
+            list.add(null);
+        }
+
+        return new CoreListWrapper<>(list);
     }
 
     @SuppressWarnings("unchecked")
