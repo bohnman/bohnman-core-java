@@ -8,16 +8,19 @@ public class CoreObjects {
     private CoreObjects() {
     }
 
+    public static Integer compare(@Nullable Object o1, @Nullable Object o2) {
+        return compare(o1, o2, null);
+    }
 
     @SuppressWarnings("unchecked")
     @Nullable
-    public static Integer compare(@Nullable Object o1, @Nullable Object o2) {
-        if (Objects.equals(o1, o2)) {
+    public static Integer compare(@Nullable Object o1, @Nullable Object o2, Integer defaultValue) {
+        if (equals(o1, o2)) {
             return 0;
         }
 
         if (o1 == null || o2 == null) {
-            return null;
+            return defaultValue;
         }
 
         if (o1 instanceof Number && o2 instanceof Number) {
@@ -27,21 +30,38 @@ public class CoreObjects {
         }
 
         if (!(o1 instanceof Comparable)) {
-            return null;
+            return defaultValue;
         }
 
         if (!(o2 instanceof Comparable)) {
-            return null;
+            return defaultValue;
         }
 
         if (!o1.getClass().isAssignableFrom(o2.getClass())) {
-            return null;
+            return defaultValue;
         }
 
         Comparable c1 = (Comparable) o1;
         Comparable c2 = (Comparable) o2;
 
-        return c1.compareTo(c2);
+        try {
+            return c1.compareTo(c2);
+        } catch (ClassCastException e) {
+            return defaultValue;
+        }
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    public static boolean equals(@Nullable Object o1, @Nullable Object o2) {
+        if (o1 instanceof Number && o2 instanceof Number) {
+            double d1 = ((Number) o1).doubleValue();
+            double d2 = ((Number) o2).doubleValue();
+            return d1 == d2;
+        }
+
+        return Objects.equals(o1, o2);
     }
 
 
