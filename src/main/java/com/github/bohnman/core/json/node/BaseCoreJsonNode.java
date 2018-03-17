@@ -12,7 +12,7 @@ public abstract class BaseCoreJsonNode<T> implements CoreJsonNode<T> {
 
         new BaseCoreJsonNodeVisitor<T>() {
             @Override
-            protected CoreJsonNode<T> visitAtomNode(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
+            protected CoreJsonNode<T> visitAtomNode(CoreJsonNodeVisitorContext<T> context, CoreJsonNode<T> node) {
                 if (predicate.test(context, node)) {
                     nodes.add(node);
                 }
@@ -28,7 +28,7 @@ public abstract class BaseCoreJsonNode<T> implements CoreJsonNode<T> {
     public CoreJsonNode<T> transform(CoreJsonNodeFunction<T> function) {
         return new BaseCoreJsonNodeVisitor<T>() {
             @Override
-            protected CoreJsonNode<T> visitAtomNode(CoreJsonNodeVisitorContext context, CoreJsonNode<T> node) {
+            protected CoreJsonNode<T> visitAtomNode(CoreJsonNodeVisitorContext<T> context, CoreJsonNode<T> node) {
                 return function.apply(context, node);
             }
         }.visit(this);
