@@ -55,6 +55,27 @@ import java.util.Map;
  */
 public abstract class CoreAssert {
 
+    public static void throwsAny(Runnable runnable) {
+        try {
+            runnable.run();
+        } catch (Throwable t) {
+            return;
+        }
+
+        state(false, "Did not throw exception");
+    }
+
+    public static void throwsAny(Runnable runnable, Class<? extends Throwable> throwableClass) {
+        try {
+            runnable.run();
+        } catch (Throwable t) {
+            state(throwableClass.isAssignableFrom(t.getClass()), String.format("Expecting throwable of type [%s], but got[%s].", throwableClass.getName(), t.getClass().getName()));
+            return;
+        }
+
+        state(false, "Did not throw exception");
+    }
+
     /**
      * Assert a boolean expression, throwing an {@code IllegalStateException}
      * if the expression evaluates to {@code false}.
