@@ -1,9 +1,10 @@
 package com.github.bohnman.core.tuple;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Objects;
 
-public class CorePair<L, R> {
+public class CorePair<L, R>  implements Map.Entry<L, R> {
 
     @Nullable
     private final L left;
@@ -24,6 +25,21 @@ public class CorePair<L, R> {
     @Nullable
     public R getRight() {
         return right;
+    }
+
+    @Override
+    public L getKey() {
+        return getLeft();
+    }
+
+    @Override
+    public R getValue() {
+        return getRight();
+    }
+
+    @Override
+    public R setValue(R value) {
+        throw new UnsupportedOperationException("setValue");
     }
 
     public static <L, R> CorePair<L, R> of(@Nullable L left, @Nullable R right) {
