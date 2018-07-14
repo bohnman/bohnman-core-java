@@ -8,7 +8,6 @@ import java.lang.annotation.ElementType;
 @TypeQualifierDefault({
         ElementType.FIELD,
         ElementType.METHOD,
-        ElementType.PARAMETER,
-        ElementType.TYPE_USE})
+        ElementType.PARAMETER})
 public @interface NonnullByDefault {
 }

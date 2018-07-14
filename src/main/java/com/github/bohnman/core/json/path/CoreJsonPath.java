@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /*
     Represents the path structuore in the object graph
@@ -69,6 +70,7 @@ public class CoreJsonPath {
         return true;
     }
 
+
     @Override
     public int hashCode() {
         int result = elements.hashCode();
@@ -77,6 +79,10 @@ public class CoreJsonPath {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return elements.stream().map(CoreJsonPathElement::getName).collect(Collectors.joining("."));
+    }
 
     public static CoreJsonPath empty() {
         return new CoreJsonPath(Collections.emptyList());
