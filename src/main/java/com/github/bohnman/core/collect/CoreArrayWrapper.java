@@ -196,9 +196,7 @@ public interface CoreArrayWrapper extends CoreIndexedIterableWrapper<Object, Obj
         return size() == 0;
     }
 
-    default CoreArrayWrapper create(int size) {
-        return CoreArrays.wrap(CoreArrays.newArray(getValue().getClass().getComponentType(), size));
-    }
+    CoreArrayWrapper create(int size);
 
     @SuppressWarnings("MethodDoesntCallSuperMethod")
     default CoreArrayWrapper copy() {

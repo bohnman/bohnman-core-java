@@ -38,8 +38,8 @@ public class CoreArrays {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T[] newArray(Class<T> type, int length) {
-        return (T[]) Array.newInstance(type, length);
+    public static CoreArrayWrapper wrapperOf(Class<?> type, int length) {
+        return wrap(Array.newInstance(type, length));
     }
 
     public static CoreArrayWrapper wrap(Object array) {
@@ -126,6 +126,10 @@ public class CoreArrays {
             return array;
         }
 
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new BooleanArrayWrapper(new boolean[size]);
+        }
     }
 
 
@@ -167,6 +171,11 @@ public class CoreArrays {
         public Object getValue() {
             return array;
         }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new CharArrayWrapper(new char[size]);
+        }
     }
 
     private static class ByteArrayWrapper implements CoreArrayWrapper {
@@ -206,6 +215,11 @@ public class CoreArrays {
         @Override
         public Object getValue() {
             return array;
+        }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new ByteArrayWrapper(new byte[size]);
         }
     }
 
@@ -247,6 +261,11 @@ public class CoreArrays {
         public Object getValue() {
             return array;
         }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new ShortArrayWrapper(new short[size]);
+        }
     }
 
     private static class IntArrayWrapper implements CoreArrayWrapper {
@@ -286,6 +305,11 @@ public class CoreArrays {
         @Override
         public Object getValue() {
             return array;
+        }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new IntArrayWrapper(new int[size]);
         }
     }
 
@@ -328,6 +352,11 @@ public class CoreArrays {
         public Object getValue() {
             return array;
         }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new LongArrayWrapper(new long[size]);
+        }
     }
 
     private static class FloatArrayWrapper implements CoreArrayWrapper {
@@ -367,6 +396,11 @@ public class CoreArrays {
         @Override
         public Object getValue() {
             return array;
+        }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new FloatArrayWrapper(new float[size]);
         }
     }
 
@@ -408,6 +442,11 @@ public class CoreArrays {
         public Object getValue() {
             return array;
         }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new DoubleArrayWrapper(new double[size]);
+        }
     }
 
     static class ObjectArrayWrapper implements CoreArrayWrapper {
@@ -447,6 +486,11 @@ public class CoreArrays {
         @Override
         public Object getValue() {
             return array;
+        }
+
+        @Override
+        public CoreArrayWrapper create(int size) {
+            return new ObjectArrayWrapper(new Object[]{size});
         }
     }
 }
