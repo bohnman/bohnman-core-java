@@ -10,10 +10,7 @@ import com.github.bohnman.core.range.CoreIntRange;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class CoreBeans {
@@ -77,6 +74,7 @@ public class CoreBeans {
         return getReadablePropertyDescriptors(o.getClass())
                 .filter(propertyDescriptor -> propertyDescriptor.getName().equals(keyString))
                 .map(propertyDescriptor -> CoreMethods.invoke(propertyDescriptor.getReadMethod(), o))
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
 
