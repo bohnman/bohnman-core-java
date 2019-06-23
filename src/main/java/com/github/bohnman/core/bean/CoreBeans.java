@@ -50,7 +50,7 @@ public class CoreBeans {
         }
 
         if (o instanceof Iterable) {
-            List list = CoreLists.of((Iterable) o);
+            List list = CoreLists.toList((Iterable) o);
             int size = list.size();
 
             if (key instanceof Number) {
